@@ -1,6 +1,5 @@
 use projet::cli::CliArguments;
 use projet::scan::scan;
-use projet::cr_file::j_file;
 
 fn print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
