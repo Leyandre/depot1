@@ -2,6 +2,7 @@ use std::path::{Path, PathBuf};
 use serde::{Serialize, Deserialize};
 use id3::{Tag, TagLike};
 
+// Structure recevant les métadonnées d'un fichier mp3 lu
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MusicFile {
     path: PathBuf,
@@ -14,10 +15,14 @@ pub struct MusicFile {
 
 
 impl MusicFile {
+    // Création automatique d'un MusicFile
     pub fn new(path: &Path) -> MusicFile {
+        // mot rapide en cas d'absence de valeur
         let n = "None";
         
+        // Vérifie si le fichier mp3 contient bien un tag id3
         match Tag::read_from_path(&path) {
+            // Si non, configure des valeurs par défaut
             Err(_why) => {
                 MusicFile {
                     path: path.to_path_buf(),
@@ -28,6 +33,7 @@ impl MusicFile {
                     duration: 0,
                 }
             },
+            // Si oui, récupère du tag les informations recherchées
             Ok(tag_there) => {
                 MusicFile {
                     path: path.to_path_buf(),
@@ -57,22 +63,39 @@ impl MusicFile {
 
     }
 
+    // Création manuelle d'un MusicFile
+    pub fn set_new(p: &Path, a: String, t: String, al: String, an: i32, d: u32) -> MusicFile {
+        MusicFile {
+            path: p.to_path_buf(),
+            artiste: a,
+            titre: t,
+            album: al,
+            annee: an,
+            duration: d,
+        }
+    }
+
+    // récupère le nom de l'artiste
     pub fn artiste(&self) -> &String {
         &self.artiste
     }
 
+    // récupère le nom du titre du morceau
     pub fn titre(&self) -> &String {
         &self.titre
     }
 
+    // récupère le nom de l'album du morceau
     pub fn album(&self) -> &String {
         &self.album
     }
 
+    // récupère l'année de sortie du morceau
     pub fn annee(&self) -> i32 {
         self.annee
     }
 
+    // récupère la durée du morceau
     pub fn duration(&self) -> u32 {
         self.duration
     }
