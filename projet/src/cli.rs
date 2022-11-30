@@ -20,7 +20,7 @@ pub struct CliArguments {
 
     /// (Used with --search) Keyword(s) used to filtered metadata's files
     #[arg(long, value_name = "KEYWORDS")]
-    kwrds : String,
+    kwrds : Option<String>,
 }
 
 impl CliArguments {
@@ -33,7 +33,7 @@ impl CliArguments {
     }
 
     pub fn kwords(&self) -> &String {
-        &self.kwrds
+        self.kwrds.as_ref().unwrap()
     }
 
     pub fn scan(&self) -> bool {

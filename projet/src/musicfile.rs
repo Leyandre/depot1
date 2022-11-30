@@ -56,4 +56,24 @@ impl MusicFile {
         }
 
     }
+
+    pub fn artiste(&self) -> &String {
+        &self.artiste
+    }
+
+    pub fn titre(&self) -> &String {
+        &self.titre
+    }
+
+    pub fn album(&self) -> &String {
+        &self.album
+    }
+
+    pub fn annee(&self) -> i32 {
+        self.annee
+    }
+
+    pub fn duration(&self) -> u32 {
+        self.duration
+    }
 }

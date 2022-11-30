@@ -5,12 +5,12 @@ use crate::cr_file::j_file;
 
 const SUPPORTED_EXTENSIONS: [&str; 1] = ["mp3"];
 
-fn is_supported(entry: &DirEntry) -> bool {
+pub fn is_supported(entry: &DirEntry) -> bool {
     entry.path().is_file() &&
     SUPPORTED_EXTENSIONS.contains(&entry.path().extension().unwrap().to_str().unwrap())
 }
 
-fn is_hidden(entry: &DirEntry) -> bool {
+pub fn is_hidden(entry: &DirEntry) -> bool {
     if entry.file_name().to_str().unwrap()[0..1] == "."[0..1] {
         return true;
     }
